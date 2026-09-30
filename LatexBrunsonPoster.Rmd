@@ -1,0 +1,936 @@
+---
+title: "Latex Brunson Poster"
+author: "Samuel Altman"
+date: "2026-09-17"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+install.packages("tinytex")
+tinytex::install_tinytex()
+
+# Problem 2 
+
+We are trying to compute the $2$-modulus of the family $\Gamma$. Since all the edge weights are equal, the optimization problem becomes
+
+\[
+\begin{aligned}
+\text{minimize} \quad &\rho^T\rho \\
+\text{subject to} \quad & N\rho \geq \mathbf{1}
+\end{aligned}
+\]
+
+## Solution 
+
+The objective function becomes 
+
+\[
+f(\rho)
+= 
+\rho^T\rho
+=
+\rho_1^2 +\rho_2^2 +\rho_3^2 +\rho_4^2.
+\]
+
+Thus represents the total squared density assigned to the four edges. From this, we can find the desnity $\rho$ that makes this as small as possible. We start with the path matrix: 
+
+\[
+N
+=
+\begin{bmatrix}
+1 & 1 & 0 & 0 \\
+1 & 0 & 1 & 1
+\end{bmatrix}
+\]
+
+Thus,
+
+\[
+N\rho 
+=
+\begin{bmatrix}
+\rho_1 + \rho_2\\
+\[
+\rho_1+\rho_3+\rho_4
+\]
+\end{bmatrix}.
+\]
+
+So the constraint becomes
+
+\[
+\begin{cases}
+\rho+1 + \rho_2 \geq 1,\\
+\rho_1 +\rho_3 + \rho_4\geq1. 
+\end{cases}
+\]
+
+The first constraint corresponds to the path $\gamma_1=acv$ and the second constraint corresponds to the path $\gamma_2=acdb$. It is important to note that each path must have a total density of $1$. 
+
+## Critical Points
+
+We must first check whether the minimum for $\rho$ can occur at an interior critical point, conducting multivariable calculus. For differentiable functions, the interior must satisfy: 
+
+\[
+\nabla f(\rho)=0
+\]
+
+This makes the gradient of the function
+
+\[
+\nabla f(\rho)
+= 
+\begin{bmatrix}
+2\rho_1\\
+2\rho_2\\
+2\rho_3\\
+2\rho_4
+\end{bmatrix}.
+\]
+\[
+\nabla f(\rho) = 0. 
+\]
+\[
+2\rho_1 = 2\rho_2 = 2\rho_3 = 2\rho_4 = 0
+\]
+
+\[
+\boxed{\rho = (0,0,0,0)}. 
+\]
+
+\[
+\text{However,} \boxed(0,0,0,0)\text{is not feasible since }
+0 + 0 = 0 < 1
+\]
+
+Thus, the constrained minimum cannot occur at the interiro critical point and we must look at the boundaries instead
+
+## Boundary 1 Point
+
+At boundary 1, we see that the first path constraint comes into play. The inequality becomes the equality: 
+
+\[
+\rho_1 +\rho_2 = 1
+\quad\Longrightarrow\quad
+\rho_2 = 1 - \rho_1.
+\]
+
+After substituting into the objective function, 
+
+\[
+f_1(\rho_1) 
+=
+\rho_1^2 + (1-\rho_1)^2
+\]
+
+Taking the derivative, 
+
+\[f_1'(\rho_1)
+= 
+2\rho_1 - 2(1-\rho_1)
+= 
+4\rho_1-2
+\]
+
+After setting it equal to zero, 
+
+\[
+4\rho_1-2=0
+\]
+
+which gives, 
+
+\[
+\rho_1=\frac12,
+\qquad
+\rho_2=\frac12.
+\]
+
+From this, we find the critical point from the first boundary to be
+
+\[
+\boxed{
+\left(\frac12,\frac12,\rho_3,\rho_4\right)
+}.
+\]
+
+This boundary provides us with a critical point, but only for the first two coordinates. We must look at the second path constraint for other candidates in this problem.  
+
+## Boundary 2 
+
+The second boundary occurs where the second path constraint comes into play. 
+
+\[
+\rho_1+\rho_3+\rho_4 = 1
+\]
+
+For a fixed value of \rho_1,
+
+\[
+\rho_3+\rho_4 = 1 - \rho_1.
+\]
+
+The minimum of 
+\[
+\rho_3^2 +\rho_4^2
+\]
+
+occurs when 
+
+\[
+\rho_3=\rho_4=\frac{1-\rho_1}{2}.
+\]
+
+It is important to note that we must keep their sum fixed, so that the sum of the squared values are minimized. Therefore, 
+
+\[
+\rho_3=\rho_4
+=
+\frac{1-\rho_1}{2}
+\]
+
+Now, we can express $\rho_3$ and $\rho_4$ in terms of $\rho_1$, turning this into a one-variable optimization problem. The objective function becomes
+
+
+\[
+f_2(\rho_1)
+=
+\rho_1^2
++
+2\left(\frac{1-\rho_1}{2}\right)^2.
+\]
+
+Simplifying, 
+
+\[
+f_2(\rho_1)
+=
+\rho_1^2+\frac{(1-\rho_1)^2}{2}.
+\]
+
+Taking the derivative, 
+
+\[
+f_2'(\rho_!)
+=
+2\rho_1-(1-\rho_1)
+=
+3\rho_1-1
+\]
+
+Setting the derivative equal to zero, 
+
+\[
+3\rho_1-1=0
+\]
+
+gives \[
+\rho_1=\frac13
+\]
+
+So the corresponding point is 
+
+\[
+\rho_3=\rho_4
+=
+\frac{1-\frac13}{2}
+=
+\frac13
+\]
+
+From this, the critical point on the second boundary is 
+
+\[
+\boxed{
+\left(
+\frac13,\rho_2,\frac13,\frac13\right)
+}.
+\]
+
+Like before, we must check the final path constraitn for all candidates in our original problem. 
+
+
+## Intersection Between the Boundaries
+
+This is the final boundary, where both constraints are active simultaneously. The inequalities would hold with the equality:
+
+\[
+\begin{cases}
+\rho_1+\rho_2=1,\\
+\rho_1+\rho_3+\rho_4=1
+\end{cases}
+\]
+
+From the first constraint, 
+
+\[
+\rho_2=1=\rho_1.
+\]
+
+From the second constraint, 
+
+\[
+\rho_2=1-\rho_1.
+\]
+
+Like mentioned before, to minimize the quanityt $\rho_3^2+\rho_4^2$ over a fixed value of $\rho_1$, $\rho_3$ and $\rho_4$ must be equal. So, 
+
+\[
+\rho_3=\rho_4=\frac{1-\rho_1}{2}.
+\]
+
+Through all of this, we can write every coordinat eof $\rho$ through the single variable $\rho_1$. After substituting, we get an objective function of  
+
+\[
+f(\rho_1)
+=
+\rho_1^2
++
+(1-\rho_1)^2
++
+2\left(\frac{1-\rho_1}{2}\right)^2.
+\]
+
+Simplifying, 
+
+\[
+f(\rho_1)
+=
+\rho_1^2+\frac32(1-\rho_2)^2.
+\]
+
+The Boundary Intersection Critical Point can be found through 
+
+\[
+f'(\rho_1)
+=
+2\rho_1=3(1-\rho_2)
+=
+5\rho_1-3.
+\]
+
+Setting 
+
+\[
+f'(\rho_1)=0
+\]
+
+gives 
+
+\[
+5\rho_1-3=0
+]
+
+and therefore, 
+
+\[
+\rho_1=\frac35.
+\]
+
+The other coordinates are found through 
+
+\[
+\rho_2
+=
+1-\frac35
+=
+\frac25,
+\]
+
+and
+
+\[
+\rho_3=\rho_4
+=
+\frac{1-\frac35}{2}
+=
+\frac15
+\]
+
+Therefore, 
+
+\[
+\boxed{\rho^*
+=
+\begin{bmatrix}
+\frac35\\[2mm]
+\frac25\\[2mm]
+\frac15\\[2mm]
+\frac15
+\end{bmatrix}
+}.
+\]
+
+## Calculate the Minimum/Candidates Test 
+
+We now evaluate the original objective function at $\rho^*$
+
+\[
+f(\rho^*)
+=
+\left(\frac35\right)^2
++
+\left(\frac25\right)^2
++
+\left(\frac15\right)^2
++
+\left(\frac15\right)^2.
+\]
+
+\[
+=
+\frac{9}{25}
++
+\frac{4}{25}
++
+\frac{1}{25}
++
+\frac{1}{25}
+=
+\frac{15}{25}
+=
+\frac35.
+\]
+
+Thus, 
+
+\[
+\boxed{
+\operatorname{Mod}_2(\Gamma) = \frac35
+}.
+\]
+}
+]
+\]
+
+
+# Problem 3
+
+In this problem, we are attempting to maximize the dual function
+
+\[
+g(\lambda)
+=
+\lambda^T\mathbf{1}
+-\frac{1}{4}\lambda^TNN^T\lambda.
+\]
+
+The path matrix is 
+
+\[
+N=
+\begin{bmatrix}
+1&1&0&0\\
+1&0&1&1
+\end{bmatrix}.
+\]
+
+Therefore,
+
+\[
+NN^T=
+\begin{bmatrix}
+2&1\\
+1&3
+\end{bmatrix}.
+\]
+
+Expanding the function, we get 
+
+\[
+g(\lambda_1,\lambda_2)
+=
+\lambda_1+\lambda_2
+-\frac{1}{2}\lambda_1^2
+-\frac{1}{2}\lambda_1\lambda_2
+-\frac{3}{4}\lambda_2^2.
+\]
+
+## Critical Points 
+
+The first thing we must do is get the critical points in the interior of the feasible region, We can do this by setting both partial derivatives equal to zero. 
+
+\[
+\frac{\partial g}{\partial\lambda_1}
+=
+1-\lambda_1-\frac{1}{2}\lambda_2
+\]
+
+\[
+\frac{\partial g}{\partial\lambda_2}
+=
+1-\frac{1}{2}\lambda_1-\frac{3}{2}\lambda_2.
+\]
+
+Setting both partial derivatives equal to zero, 
+
+\[
+\begin{cases}
+1-\lambda_1-\frac{1}{2}\lambda_2=0,\\
+1-\frac{1}{2}\lambda_1-\frac{3}{2}\lambda_2=0
+\end{cases}
+\]
+
+Solving this system gives, 
+
+\[
+\boxed{
+\lambda_1=\frac45,
+\qquad
+\lambda_2=\frac25
+}
+\]
+
+This critical point is feasible because both values are nonnegative
+
+## Boundary Points 
+
+We must also check the boundaries of the feasible region. 
+
+\[
+\text{The boundaries are}
+\lambda_1=0
+\text{and}
+\lambda_2=0
+\text{because}
+\lambda_1, \lambda_2\geq0
+\]
+
+### Boundary 1: 
+
+For
+
+\[
+\lambda_1 = 0
+\]
+
+\[
+g(0,\lambda_2)
+=
+\lambda_2-\frac34\lambda_2^2
+\]
+
+We can then find the critical point along this boundary by taking the derivative
+
+\[
+\frac{d}{d\lambda_2}g(0,\lambda_2)
+=
+1-\frac32\lambda_2.
+\]
+
+Thus,
+
+\[
+\lambda_2 = \frac23
+\]
+
+Thus, the candidate point on this boundary is 
+\[
+\left(0,\frac23\right).
+\]
+
+### Boundary 2:
+
+For 
+
+\[
+\lambda_2 = 0
+\]
+
+\[
+g(\lambda_1,0)
+=
+\lambda_1-\frac12\lambda_1^2.
+\]
+
+\[
+\frac{d}{d\lambda_1}g(\lambda_1,0)
+=
+1-\lambda_1
+\]
+
+Thus, 
+
+\[
+\lambda_1 = 1
+\]
+
+Thus, the candidate point on this boundary is 
+
+\[
+(1,0)
+\]
+
+## Candidates Test
+
+We can now evaluate \(g\) at the interior critical point and the two boundary candidates.
+
+For the interior critical point,
+
+\[
+g\left(\frac45,\frac25\right)
+=
+\frac45+\frac25
+-\frac12\left(\frac45\right)^2-\frac12\left(\frac45\right)\left(\frac25\right)
+-\frac34\left(\frac25\right)^2
+\]
+
+\[
+=
+\boxed{\frac35}.
+\]
+
+For the boundaries
+
+\[
+g\left(0,\frac23\right)
+=
+\frac23-\frac34\left(\frac23\right)^2
+=
+\frac13.
+\]
+
+\[
+g(1,0)
+=
+1-\frac12
+=\frac12.
+\]
+
+Therefore, 
+
+\[
+\frac35>\frac12>\frac13,
+\]
+
+so the maximum is 
+
+\[
+\boxed{
+\lambda^*
+=
+\left(\frac45,\frac25\right)
+}
+\]
+
+and the maximum value is 
+
+\[
+\boxed{
+\max_{\lambda\geq0}g(\lambda)=\frac35.
+}
+\]
+
+# Problem 4 
+
+\[
+\operatorname{Mod}_{2,\sigma}(\Gamma)
+=
+\min_{\rho}
+\sum_{e\in E}\sigma(e)\rho(e)^2
+\]
+
+subject to 
+
+\[
+N\rho \geq \mathbf{1}. 
+\]
+
+Simply put, we are attempting to find the density $\rho$ that makes the sum of squared densities as small as possible. Specifically, $\sigma(e) = 1$ for every edge, so the formula becomes 
+
+\[
+\operatorname{Mod}_2(\Gamma)
+=
+\min_{\rho}
+\left(
+\rho_1^2+\rho_2^2+\rho_3^2+\rho_4^2
+\right)
+\]
+
+subject to 
+
+\[N\rho
+=
+\begin{bmatrix}
+\rho_1+\rho_2\\
+\rho_1+\rho_3+\rho_4
+\end{bmatrix}
+\geq
+\begin{bmatrix}
+1\\
+1
+\end{bmatrix}.
+\]
+
+At the intersection where both constraints are equalities, as shown in Problem 2, we have 
+
+\[
+\rho_1 + \rho_2 1
+\]
+
+and 
+
+\[
+\rho_1+\rho_3 +\rho_4=1
+\]
+
+From this, 
+
+\[
+\rho_2=1-\rho_1
+\]
+
+and 
+
+\[
+\rho_3+\rho_4=\rho_1
+\]
+
+When solving for these equations, we find that the minimum of $\rho_3^2+\rho_4^2$ occurs when 
+
+\[
+\rho_3=\rho_4=\frac{1-\rho_1}{2}
+\]
+
+In other words, through this equation, we are able to turn this four-variable problem into a one-variable problem. When simplifying, we get, 
+
+\[
+f(\rho_1)
+=
+\rho_1^2+\frac{3}{2}(1-\rho_1)^2.
+\]
+
+We next take the derivative of this equation so we can find our specific value at the zero; 
+
+\[
+f'(\rho_1)
+=
+2\rho_1-3(1-\rho_1)
+=
+5\rho_1-3
+\]
+
+When setting the derivative equal to zero, we get 
+\[
+5\rho_1-3=0
+\]
+
+so 
+
+\[
+\rho_1=\frac35
+\]
+
+and 
+
+\[
+\rho_2=1-\frac35=\frac25
+\]
+
+Now, all we have to do is plug the values back into the intiial modulus to find $\operatorname{Mod}_2(\Gamma)$. Specifically, the extremal density should be. 
+
+\[
+\boxed{
+\rho^*
+=
+\left(
+\frac35,\frac25,\frac15,\frac15
+\right)
+}.
+\]
+
+The $2$-modulus is the value of the objective function at $\rho^*$:
+
+\[
+\operatorname{Mod}_2(\Gamma)
+=
+\left(\frac35\right)^2
++
+\left(\frac25\right)^2
++
+\left(\frac15\right)^2
++
+\left(\frac15\right)^2
+\]
+
+Therefore, 
+
+\[
+\operatorname{Mod}_2(\Gamma)
+=
+\frac{9}{25}
++
+\frac{4}{25}
++
+\frac{1}{25}
++
+\frac{1}{25}
+= 
+\frac{15}{25}
+=
+\boxed{\frac35}. 
+\]
+
+This confirms that the final result of $\operatorname{Mod}_2(\Gamma)$ is $\frac35$
+
+# Problem 5 
+
+For this problem, we have $p=2$, meaning that the graph has two paths. Path 1 is $\gamma_1 = acb$ and path 2 is $\gamma_2=acdb$. From this, we know that there are two Lagrange multipliers, where $\lambda_1 = \lambda_(\gamma_1)$ and $\lambda_2 = \lambda_(\gamma_2)$. Considering that all edge weights are 1, the Lagrangian is 
+
+\[
+L(\rho, \lambda)
+=
+\rho_1^2+\rho_2^2+\rho_3^2+\rho_4^2
++
+\lambda_1(1-\rho_1-\rho_2)
++
+\lambda_2(1-\rho_1-\rho_3-\rho_4)
+\]
+
+FOr a fixed $\lambda$, we minimize $L$ with respect to $\rho$. This leads us to the important part of stationarity, in which we take the derivative with respect to each $\rho_i$, set the derivatives equal to zero, and solve. Thus, we can find the $\rho$ that minimizes the Lagrangian. 
+
+Again, in repeating the conditions, we have 
+
+\[
+\frac{\partial L}{\partial \rho_1}
+=
+2\rho_1-\lambda_1-\lambda_2=0
+\]
+
+\[
+\frac{\partial L}{\partial \rho_2}
+=
+2\rho_2-\lambda_1=0
+\]
+
+\[
+\frac{\partial L}{\partial \rho_3}
+=
+2\rho_3-\lambda_2=0
+\]
+
+\[
+\frac{\partial L}{\partial \rho_4}
+=
+2\rho_4-\lambda_2=0
+\]
+
+When solving these equations to isolate individual $\rho_i$, we get, 
+
+\[
+\rho_1=\frac{\lambda_1+\lambda_2}{2}, 
+\qquad
+\rho_2=\frac{\lambda_1}{2}, 
+\qquad
+\rho_3=\frac{\lambda_2}{2}
+\qquad
+\rho_4=\frac{\lambda_2}{2}
+\]
+
+\[
+\boxed{
+\rho_\lambda
+=
+\left(
+\frac{\lambda_1+\lambda_2}{2},
+\frac{\lambda_1}{2},
+\frac{\lambda_2}{2},
+\frac{\lambda_2}{2}
+\right)
+}.
+\]
+
+After reaching this stationarity condition, where $\rho_(\lambda)$ minimizes the Lagrangian for a given $\lambda$, we must plug it back in. 
+
+\[
+g(\lambda)
+=
+\lambda_1+\lambda_2
+- 
+\frac{1}{4}
+\left(
+2\lambda_1^2
++
+2\lambda_1\lambda_2
++
+3\lambda_2^2
+\right).
+\]
+
+Therefore, 
+
+\[
+g(\lambda)
+=
+\lambda_1+\lambda_2
+-\frac12\lambda_1^2
+-\frac12\lambda_1\lambda_2
+-\frac34\lambda_2^2
+\]
+
+From there, $\rho$ is eliminated, and we are left with $\lambda_1$ and $\lambda_2$. We must maximimize $g(\lambda)$ over $\lambda_1,\lambda_2\geq0$, as the problem states. With the stationairty conditions as 
+
+\[
+\frac{\partial g}{\partial\lambda_1}
+=
+1-\lambda_1=\frac12\lambda_2=0
+\]
+
+\[
+\frac{\partial g}{\partial\lambda_2}
+=
+1-\frac12\lambda_!-\frac32\lambda_2=0
+\]
+
+Solving this gives us
+
+\[
+\lambda_1^*=\frac45
+\qquad
+\lambda_2^*=\frac25.
+\]
+
+Thus, 
+
+\[
+\lambda^*
+=
+\left(
+\frac45,\frac25
+\right).
+\]
+
+When completing the dual objective at $\lambda^*$, we get the final calculation that, 
+
+\[
+\operatorname{Mod}_2(\Gamma)
+=
+g(\lambda^*)
+\]
+
+\[
+=
+\frac45+\frac25
+-\frac12\left(\frac45\right)^2
+-\frac12\left(\frac45\right)\left(\frac25\right)
+-\frac34\left(\frac25\right)^2
+\]
+
+Therefore, 
+
+\[
+\operatorname{Mod}_2(\Gamma)
+=
+\frac65-\frac{8}{25}-\frac{4}{25}-\frac{3}{25}
+=
+\frac{15}{25}
+=
+\boxed{\frac35}.
+\]
+
+Therefore, both methods, the direct simplification method and the Lagrangian method, yield the same results. This is as expected since all the Lagrangian method does is replace the four unknown $\rho_i$ with two $\lambda_i$ to simplify the problem. 
