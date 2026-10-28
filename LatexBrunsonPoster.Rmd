@@ -16,7 +16,7 @@ tinytex::install_tinytex()
 
 # Problem 2 
 
-We are trying to compute the $2$-modulus of the family $\Gamma$. Since all the edge weights are equal, the optimization problem becomes
+We are trying to compute the $2$-modulus of the family $\Gamma$, which represent the collection of walks or routes in a network. The purpose of this modulus is to see how easily a family can trasmit a signal through the network. To calculate the $2$-modulus, we assign a density $\rho(e)$ to each edge $e$ in the network. The goal then becomes to Since all the edge weights are equal, the optimization problem becomes
 
 \[
 \begin{aligned}
@@ -34,10 +34,10 @@ f(\rho)
 = 
 \rho^T\rho
 =
-\rho_1^2 +\rho_2^2 +\rho_3^2 +\rho_4^2.
+{\rho_1}^2 +{\rho_2}^2 +{\rho_3}^2 +{\rho_4}^2.
 \]
 
-Thus represents the total squared density assigned to the four edges. From this, we can find the desnity $\rho$ that makes this as small as possible. We start with the path matrix: 
+This represents the total squared density assigned to the four edges. From this, we can find the desnity $\rho$ that makes this as small as possible. We start with the path matrix: 
 
 \[
 N
@@ -68,7 +68,7 @@ So the constraint becomes
 \end{cases}
 \]
 
-The first constraint corresponds to the path $\gamma_1=acv$ and the second constraint corresponds to the path $\gamma_2=acdb$. It is important to note that each path must have a total density of $1$. 
+The first constraint corresponds to the path $\gamma_1=acd$ and the second constraint corresponds to the path $\gamma_2=acdb$. It is important to note that each path must have a total density of $1$. 
 
 ## Critical Points
 
@@ -90,12 +90,20 @@ This makes the gradient of the function
 2\rho_4
 \end{bmatrix}.
 \]
+
+Setting, 
+
 \[
 \nabla f(\rho) = 0. 
 \]
+
+yields
+
 \[
 2\rho_1 = 2\rho_2 = 2\rho_3 = 2\rho_4 = 0
 \]
+
+and so
 
 \[
 \boxed{\rho = (0,0,0,0)}. 
@@ -106,7 +114,7 @@ This makes the gradient of the function
 0 + 0 = 0 < 1
 \]
 
-Thus, the constrained minimum cannot occur at the interiro critical point and we must look at the boundaries instead
+Thus, the constrained minimum cannot occur at the interior critical point and we must look at the boundaries instead.
 
 ## Boundary 1 Point
 
@@ -128,7 +136,7 @@ f_1(\rho_1)
 
 Taking the derivative, 
 
-\[f_1'(\rho_1)
+\[\frac{\partial f_1}{\partial \rho_1}(\rho_1)
 = 
 2\rho_1 - 2(1-\rho_1)
 = 
@@ -141,7 +149,7 @@ After setting it equal to zero,
 4\rho_1-2=0
 \]
 
-which gives, 
+which gives
 
 \[
 \rho_1=\frac12,
@@ -184,15 +192,7 @@ occurs when
 \rho_3=\rho_4=\frac{1-\rho_1}{2}.
 \]
 
-It is important to note that we must keep their sum fixed, so that the sum of the squared values are minimized. Therefore, 
-
-\[
-\rho_3=\rho_4
-=
-\frac{1-\rho_1}{2}
-\]
-
-Now, we can express $\rho_3$ and $\rho_4$ in terms of $\rho_1$, turning this into a one-variable optimization problem. The objective function becomes
+The sum of the squared values are now minimized.Now, we can express $\rho_3$ and $\rho_4$ in terms of $\rho_1$, turning this into a one-variable optimization problem. The objective function becomes
 
 
 \[
@@ -214,7 +214,7 @@ f_2(\rho_1)
 Taking the derivative, 
 
 \[
-f_2'(\rho_!)
+\frac{\partial f_1}{\partial \rho_1}(\rho_1)
 =
 2\rho_1-(1-\rho_1)
 =
@@ -250,7 +250,7 @@ From this, the critical point on the second boundary is
 }.
 \]
 
-Like before, we must check the final path constraitn for all candidates in our original problem. 
+Like before, we must check the final path constraint for all candidates in our original problem. 
 
 
 ## Intersection Between the Boundaries
@@ -282,7 +282,7 @@ Like mentioned before, to minimize the quanityt $\rho_3^2+\rho_4^2$ over a fixed
 \rho_3=\rho_4=\frac{1-\rho_1}{2}.
 \]
 
-Through all of this, we can write every coordinat eof $\rho$ through the single variable $\rho_1$. After substituting, we get an objective function of  
+Through all of this, we can write every coordinate of $\rho$ through the single variable $\rho_1$. After substituting, we get an objective function of  
 
 \[
 f(\rho_1)
@@ -305,9 +305,9 @@ f(\rho_1)
 The Boundary Intersection Critical Point can be found through 
 
 \[
-f'(\rho_1)
+\frac{\partial f_1}{\partial \rho_1}(\rho_1)
 =
-2\rho_1=3(1-\rho_2)
+2\rho_1+3(1-\rho_2)
 =
 5\rho_1-3.
 \]
@@ -315,7 +315,7 @@ f'(\rho_1)
 Setting 
 
 \[
-f'(\rho_1)=0
+\frac{\partial f_1}{\partial \rho_1}(\rho_1)=0
 \]
 
 gives 
@@ -703,7 +703,7 @@ f(\rho_1)
 We next take the derivative of this equation so we can find our specific value at the zero; 
 
 \[
-f'(\rho_1)
+\frac{\partial f_1}{\partial \rho_1}(\rho_1)
 =
 2\rho_1-3(1-\rho_1)
 =
